@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>I LOVE YOU</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Kanit', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      text-align: center;
+    }
+
+    .message {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff1493;
+      display: flex;
+      gap: 0.3em;
+      margin-bottom: 20px;
+    }
+
+    .letter {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: popUp 0.6s forwards;
+    }
+
+    @keyframes popUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    img {
+      max-width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 15px 0;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-top: 10px;
+    }
+
+    #loveMsg {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #e83e8c;
+      display: none;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- เพลง -->
+  <audio id="bgMusic" loop>
+    <!-- ใส่ชื่อเพลงของคุณตรงนี้ -->
+    <source src="emotional-love-cute-trap-beat-love-type-beat-prod-by-onesevenbeatxs-303745.mp3" type="audio/mp3">
+    <!-- ลิงก์สำรอง ถ้าไฟล์บนเครื่องไม่ทำงาน -->
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    เบราว์เซอร์ของคุณไม่รองรับการเล่นเพลง
+  </audio>
+
+  <!-- ข้อความ -->
+  <div class="message" id="message"></div>
+
+  <!-- 👩‍❤️‍👨 รูปคู่ -->
+  <img src="n.jpg" alt="รูปคู่ของเรา" id="couplePhoto">
+
+  <!-- ปุ่มบอกรัก -->
+  <button onclick="showLoveMsg()">รักเธอนะไออ้วน คิคิ 💖</button>
+
+  <!-- ปุ่มเล่นเพลง -->
+  <button onclick="playMusic()">▶️ เปิดเพลง</button>
+
+  <!-- ข้อความหลังปุ่ม -->
+  <div id="loveMsg">รักแฟนที่สุดในจักรวาลเลยนะ แงงๆ 💗💗💗</div>
+
+  <script>
+    const text = "I LOVE YOU ❤️";
+    const container = document.getElementById("message");
+
+    text.split("").forEach((char, index) => {
+      const span = document.createElement("span");
+      span.classList.add("letter");
+      span.textContent = char;
+      span.style.animationDelay = `${index * 0.2}s`;
+      container.appendChild(span);
+    });
+
+    function showLoveMsg() {
+      document.getElementById("loveMsg").style.display = "block";
+    }
+
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play();
+    }
+
+    // auto-enable play on first click (มือถือ/เบราว์เซอร์ใหม่จะบล็อก auto-play)
+    document.body.addEventListener("click", () => {
+      document.getElementById("bgMusic").play();
+    }, { once: true });
+  </script>
+
+</body>
+</html>
